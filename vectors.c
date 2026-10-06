@@ -11,10 +11,10 @@ static int vector_count = 0;
 void print_info(Vect vect){
     int i = locate_vector(vect.varname);
     if (i >= 0){ //print existing vector
-        printf("vector: %s x: %.2f y: %.2fz: %.2f\n", vectors[i].varname, vectors[i].x, vectors[i].y, vectors[i].z);
+        printf("VECTOR: %s!!! X: %.2f!!! Y: %.2f!!! Z: %.2f!!!\n", vectors[i].varname, vectors[i].x, vectors[i].y, vectors[i].z);
     }
     else{ //print non-existing vector
-        printf("x:%.2f y:%.2f z: %.2f\n", vect.x, vect.y, vect.z);
+        printf("X:%.2f!!! Y:%.2f!!! Z: %.2f!!!\n", vect.x, vect.y, vect.z);
     }
 }
 /**
