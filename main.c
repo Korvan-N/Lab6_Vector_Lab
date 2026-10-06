@@ -48,7 +48,7 @@ int main(int argc, char* argv[]){
                 print_info(vect);
             }
             else{
-                printf("invalid input.\n"); 
+                printf("INVALID input.\n"); 
             }
         }
         //operation assignment (+, -)
@@ -73,7 +73,7 @@ int main(int argc, char* argv[]){
                 }
             }
             else{
-                printf("invalid input.\n"); 
+                printf("INVALID input.\n"); 
             }
         }
         //assignment
@@ -119,7 +119,7 @@ int main(int argc, char* argv[]){
                     }
                 }
                 else{
-                    printf("invalid command.\n");
+                    printf("INVALID command.\n");
                 }
             }
         }
@@ -135,7 +135,7 @@ int main(int argc, char* argv[]){
                 list();
             }
             else{
-                printf("invalid command.\n");
+                printf("INVALID command.\n");
             }
         }
 
