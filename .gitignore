@@ -1,0 +1,8 @@
+#object files
+*.o
+#dependency files
+*.d
+#exe
+lab6
+#debug
+.vscode

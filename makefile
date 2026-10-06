@@ -3,7 +3,7 @@ CFLAGS= -c -Wall
 LDFLAGS=
 SOURCES=main.c vectors.c mathfuncs.c
 OBJECTS=$(SOURCES:.c=.o)
-EXECUTABLE=lab5
+EXECUTABLE=lab6
 all: $(SOURCES) $(EXECUTABLE)
 # pull in dependency info for *existing* .o files
 -include $(OBJECTS:.o=.d)
