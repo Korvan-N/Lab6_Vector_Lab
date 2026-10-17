@@ -28,7 +28,7 @@ int main(int argc, char* argv[]){
         printf("▪ vector = vector (+ -) vector\n");
         printf("▪ vector = vector * float\n");
         printf("▪ clear\n▪ list\n▪ quit\n");
-        printf("▪ load <filename>\n▪save <filename>\n\n");
+        printf("▪ load <filename>\n▪ save <filename>\n\n");
         printf("note: spaces are REQUIRED around equal signs.\n");
         printf("note: max 100 characters per line.\n\n");
     }
