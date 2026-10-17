@@ -1,9 +1,9 @@
 CC=gcc
-CFLAGS= -c -Wall
+CFLAGS= -c -Wall -g
 LDFLAGS=
 SOURCES=main.c vectors.c mathfuncs.c
 OBJECTS=$(SOURCES:.c=.o)
-EXECUTABLE=lab6
+EXECUTABLE=lab7
 all: $(SOURCES) $(EXECUTABLE)
 # pull in dependency info for *existing* .o files
 -include $(OBJECTS:.o=.d)

@@ -1,9 +1,10 @@
 #include "vectors.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 
-Vect vectors[10];
+Vect *vectors;
 static int vector_count = 0;
 /**
  * print vector info
@@ -11,10 +12,10 @@ static int vector_count = 0;
 void print_info(Vect vect){
     int i = locate_vector(vect.varname);
     if (i >= 0){ //print existing vector
-        printf("VECTOR: %s!!! X: %.2f!!! Y: %.2f!!! Z: %.2f!!!\n", vectors[i].varname, vectors[i].x, vectors[i].y, vectors[i].z);
+        printf("vector: %s x: %.2f y: %.2f z: %.2f\n", vectors[i].varname, vectors[i].x, vectors[i].y, vectors[i].z);
     }
     else{ //print non-existing vector
-        printf("X:%.2f!!! Y:%.2f!!! Z: %.2f!!!\n", vect.x, vect.y, vect.z);
+        printf("x:%.2f y:%.2f z: %.2f\n", vect.x, vect.y, vect.z);
     }
 }
 /**
@@ -23,10 +24,12 @@ void print_info(Vect vect){
  */
 int assign(Vect vect){
     int i = locate_vector(vect.varname);
-    if(vector_count >= 10 && i == -1){ //if array is full and new vector created, return -1.
+    if(i == -1){ //if array is full and new vector created, reallocate.
+        vectors = realloc(vectors, sizeof(Vect)*(vector_count+1));
+        if(vectors == NULL){ // if reallocation fails then exit
+            printf("failed to reallocate.\n");
             return -1;
-    }
-    else if(i == -1){ // if no vector is in the array, create new entry.
+        }
         vectors[vector_count] = vect;
         vector_count += 1;
         return 0;
@@ -61,7 +64,7 @@ Vect get_vector(int index){
  * clear the vector array
  */
 void clear(){
-    memset(vectors, 0, sizeof(vectors));
+    free(vectors);
     vector_count = 0;
 }
 
@@ -82,4 +85,62 @@ void list(){
         // }
     }
     
+}
+
+/**
+ * free memory
+ */
+void quit(){
+    free(vectors);
+    exit(0);
+}
+
+/**
+ * load parameters from .csv
+ */
+void load(char* name){
+    FILE *file_ptr;
+    file_ptr = fopen(name, "r");
+    if(file_ptr == NULL){
+        printf("File not found: '%s'\n", name);
+    }
+    else{
+        char buf[100];
+        Vect vect;
+        float value1;
+        float value2;
+        float value3;
+        while(fgets(buf, sizeof(buf), file_ptr) != NULL){
+            if(strcmp(buf, "\n") && strcmp(buf, "\r\n")){
+                char* tok = strtok(buf, ",");
+                strcpy(vect.varname, tok);
+                char* rest = strtok(NULL, "");
+                sscanf(rest, "%f,%f,%f", &value1, &value2, &value3);
+                vect.x = value1;
+                vect.y = value2;
+                vect.z = value3;
+                assign(vect);
+            }
+        }
+        printf("file loaded from '%s'\n", name);
+        fclose(file_ptr);
+        list();
+    }
+}
+
+/**
+ * save parameters to .csv
+ */
+void save(char* name){
+    FILE *file_ptr = fopen(name, "w");
+    if(file_ptr != NULL){
+        for(int i = 0; i < vector_count; i++){
+            fprintf(file_ptr, "%s,%.02f,%.02f,%.02f\n", vectors[i].varname, vectors[i].x, vectors[i].y, vectors[i].z);
+        }
+        fclose(file_ptr);
+        printf("saved vectors to '%s'\n", name);
+    }
+    else{
+        printf("file failed to save.\n");
+    }
 }

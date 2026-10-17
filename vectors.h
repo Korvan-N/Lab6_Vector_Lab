@@ -5,7 +5,7 @@ typedef struct Vect
     char varname[100];
     float x, y, z;
 } Vect;
-extern Vect vectors[10];
+extern Vect *vectors;
 /**
  * print vector info
  */
@@ -35,4 +35,20 @@ void clear();
  * list each vector in the vector array
  */
 void list();
+
+/**
+ * free memory
+ */
+void quit();
+
+/**
+ * load parameters from .csv
+ */
+void load(char* name);
+
+/**
+ * save parameters to .csv
+ */
+void save(char* name);
+
 #endif // VECTORS_H
