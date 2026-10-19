@@ -106,21 +106,29 @@ void load(char* name){
     }
     else{
         char buf[100];
+        char tok[100];
+        char extra[100];
         Vect vect;
         float value1;
         float value2;
         float value3;
+        int index = 1;
         while(fgets(buf, sizeof(buf), file_ptr) != NULL){
             if(strcmp(buf, "\n") && strcmp(buf, "\r\n")){
-                char* tok = strtok(buf, ",");
-                strcpy(vect.varname, tok);
-                char* rest = strtok(NULL, "");
-                sscanf(rest, "%f,%f,%f", &value1, &value2, &value3);
-                vect.x = value1;
-                vect.y = value2;
-                vect.z = value3;
-                assign(vect);
+                int ret = sscanf(buf, "%99[^,],%f,%f,%f %s", tok, &value1, &value2, &value3, extra);
+                if(ret == 4){
+                    vect.x = value1;
+                    vect.y = value2;
+                    vect.z = value3;
+                    strcpy(vect.varname, tok);
+                    assign(vect);
+                }
+                else{
+                    printf("skipped a bad line {%d}.\n", index);
+                    
+                }
             }
+            index++;
         }
         printf("file loaded from '%s'\n", name);
         fclose(file_ptr);
