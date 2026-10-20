@@ -5,7 +5,6 @@ typedef struct Vect
     char varname[100];
     float x, y, z;
 } Vect;
-extern Vect *vectors;
 /**
  * print vector info
  */

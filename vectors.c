@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 
-Vect *vectors;
+static Vect *vectors;
 static int vector_count = 0;
 /**
  * print vector info
