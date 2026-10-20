@@ -31,4 +31,4 @@ in the command line after you've built:
 4. exit the program with `quit`.
 
 ## Dynamic memory in the program:
-program uses a struct pointer `vectors` which keeps track of the current vectors. To add a vector, the vector count increases by 1. Then pointer size gets reallocated with `realloc()`, the input being the size of the struct multiplied by the vector count. the pointer is reallocated after every insertion of data. to remove all vectors, `free(vectors)` is used.
+program uses a struct pointer `vectors` which keeps track of the current vectors. To add a vector, the vector count increases by 1. Then pointer size gets reallocated with `realloc()`, the input being the size of the struct multiplied by the vector count. the pointer is reallocated after every insertion of data. to remove all vectors, `free(vectors)` is used. 
